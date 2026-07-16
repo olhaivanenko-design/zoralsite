@@ -209,7 +209,7 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; margin: 0; }
 
 .nav-links {
   display: flex;
-  gap: 28px;
+  gap: 48px;
   font-size: 0.9rem;
   color: var(--text-1);
 }
