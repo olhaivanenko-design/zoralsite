@@ -237,8 +237,10 @@
     logo.style.opacity    = '0';
   }, 2070);
 
-  // 3.5 — Contract lines back to centre (reverse of expansion)
+  // 3.5 — Contract lines from outer edges toward centre
   setTimeout(function () {
+    lineL.style.transformOrigin = 'left center';
+    lineR.style.transformOrigin = 'right center';
     lineL.style.transition = 'transform 600ms ' + LINE_EASE;
     lineR.style.transition = 'transform 600ms ' + LINE_EASE;
     lineL.style.transform  = 'scaleX(0)';
