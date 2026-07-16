@@ -40,8 +40,8 @@
     // through) so the text has room and the artwork reads as a smaller,
     // deliberately placed object rather than a full-bleed cover image.
     const isNarrow = w < 700;
-    const boxW = w * (isNarrow ? 0.78 : 0.6);
-    const boxH = h * (isNarrow ? 0.24 : 0.82);
+    const boxW = w * (isNarrow ? 0.78 : 0.52);
+    const boxH = h * (isNarrow ? 0.24 : 0.71);
     const marginRight = w * (isNarrow ? 0.03 : 0.05);
 
     const scale = Math.min(boxW / img.naturalWidth, boxH / img.naturalHeight);
