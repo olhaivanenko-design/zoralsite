@@ -42,7 +42,7 @@ html::-webkit-scrollbar { display: none; }
 
 /* Canvas wrap reveals faster so animation starts sooner after it appears */
 .hero-canvas-wrap.reveal {
-  transition-duration: 2000ms;
+  transition-duration: 1200ms;
 }
 
 /* On second visit preloader is skipped — show everything immediately */
