@@ -17,6 +17,7 @@
 * { box-sizing: border-box; }
 
 html {
+  margin: 0;
   scroll-behavior: smooth;
 }
 
@@ -82,12 +83,12 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; margin: 0; }
 /* ---------- Nav ---------- */
 
 .nav {
-  position: sticky;
+  position: absolute;
   top: 0;
-  z-index: 50;
-  backdrop-filter: blur(14px) saturate(140%);
-  background: rgba(8, 9, 11, 0.72);
-  border-bottom: 1px solid var(--line-soft);
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background: transparent;
 }
 
 .nav-inner {
@@ -170,7 +171,7 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; margin: 0; }
   position: relative;
   z-index: 2;
   max-width: 560px;
-  padding: 40px 24px 40px max(24px, calc((100vw - var(--maxw)) / 2 + 24px));
+  padding: 100px 24px 40px max(24px, calc((100vw - var(--maxw)) / 2 + 24px));
 }
 
 .hero h1 {
