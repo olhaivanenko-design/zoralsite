@@ -368,57 +368,33 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; margin: 0; }
 
 /* (main removed, footer handled separately) */
 
-.overview-inner {
-  max-width: var(--maxw);
-  margin: 0 auto;
-  padding: 115px 24px 60px;
-  display: flex;
-  align-items: flex-start;
-  gap: 0;
-  min-height: 419px;
-  box-sizing: border-box;
+/* Overview — Atelier typography on white background */
+.overview-section .section-tag { color: rgba(0,0,0,0.38); }
+.overview-section .tag-dot { background: var(--accent); }
+
+.overview-heading {
+  font-size: clamp(28px, 4vw, 52px);
+  font-weight: 700;
+  color: #0a0a0b;
+  letter-spacing: -1.5px;
+  line-height: 1.1;
+  margin: 48px 0 60px;
+  max-width: 860px;
 }
 
-.overview-label {
-  flex: 0 0 42%;
-  font-size: 12.48px;
-  font-weight: 600;
-  color: #a4a4a4;
-  letter-spacing: 1.5873px;
-  line-height: 19px;
-  margin: 2px 0 0;
-  text-transform: uppercase;
+.overview-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  max-width: 960px;
+  padding-bottom: 100px;
 }
 
-.overview-text {
-  flex: 1 1 auto;
-  min-width: 0;
-}
-
-.overview-text p {
-  color: #686c7b;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 21px;
-  letter-spacing: -0.4455px;
+.overview-cols p {
+  color: rgba(0,0,0,0.48);
+  font-size: 15px;
+  line-height: 1.75;
   margin: 0;
-}
-
-.overview-text p + p {
-  margin-top: 21px;
-}
-
-@media (max-width: 767px) {
-  .overview-inner {
-    flex-direction: column;
-    padding: 56px 24px;
-    gap: 32px;
-    min-height: auto;
-  }
-  .overview-label {
-    flex: none;
-    width: 100%;
-  }
 }
 
 /* ---------- Logo ticker ---------- */
