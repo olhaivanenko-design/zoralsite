@@ -170,19 +170,19 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; margin: 0; }
 .hero-inner {
   position: relative;
   z-index: 2;
-  max-width: 460px;
+  max-width: 560px;
   padding: 100px 24px 40px max(24px, calc((100vw - var(--maxw)) / 2 + 24px));
 }
 
 .hero h1 {
-  font-size: clamp(1.9rem, 3.5vw, 3rem);
+  font-size: clamp(2.1rem, 4vw, 3.05rem);
   line-height: 1.08;
   margin-bottom: 20px;
 }
 
 .hero-sub {
   color: var(--text-1);
-  font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+  font-size: 1.05rem;
   line-height: 1.65;
   margin: 0 0 32px;
   max-width: 46ch;
@@ -192,25 +192,6 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; margin: 0; }
   display: flex;
   gap: 14px;
   flex-wrap: wrap;
-}
-
-@media (min-width: 700px) and (max-width: 1199px) {
-  .hero-inner {
-    max-width: 360px;
-  }
-}
-
-@media (max-width: 699px) {
-  .hero {
-    align-items: flex-start;
-  }
-  .hero-inner {
-    max-width: 100%;
-    padding: 220px 24px 40px 24px;
-  }
-  .hero-sub {
-    max-width: 100%;
-  }
 }
 
 /* ---------- Stack strip ---------- */
