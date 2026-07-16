@@ -237,20 +237,28 @@
     logo.style.opacity    = '0';
   }, 2070);
 
+  // 3.5 — Contract lines back to centre (reverse of expansion)
+  setTimeout(function () {
+    lineL.style.transition = 'transform 600ms ' + LINE_EASE;
+    lineR.style.transition = 'transform 600ms ' + LINE_EASE;
+    lineL.style.transform  = 'scaleX(0)';
+    lineR.style.transform  = 'scaleX(0)';
+  }, 2250);
+
   // 4 — Wipe overlay upward + fire reveal (smooth inOut: gentle lift from the start)
   var WIPE_EASE = 'cubic-bezier(0.45, 0, 0.55, 1)';
   setTimeout(function () {
     preloader.style.transition = 'transform 1100ms ' + WIPE_EASE;
     preloader.style.transform  = 'translateY(-100%)';
     window.dispatchEvent(new CustomEvent('preloader-reveal'));
-  }, 2300);
+  }, 2950);
 
   // 5 — Remove overlay
   setTimeout(function () {
     preloader.remove();
     document.body.style.overflow = '';
     sessionStorage.setItem('zoral-preload', '1');
-  }, 3500);
+  }, 4100);
 }());
 </script>
 
