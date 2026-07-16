@@ -18,6 +18,7 @@
 
   let dpr = Math.min(window.devicePixelRatio || 1, 2);
   let w = 0, h = 0;
+  let currentFrame = 0;
 
   function resize() {
     const rect = canvas.parentElement.getBoundingClientRect();
@@ -28,27 +29,21 @@
     canvas.style.width = w + 'px';
     canvas.style.height = h + 'px';
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    drawFrame(currentFrame);
   }
 
   function drawFrame(index) {
+    currentFrame = index;
     const img = images[index];
     if (!img || !img.complete || img.naturalWidth === 0) return;
     ctx.clearRect(0, 0, w, h);
 
-    // Fit the frame into a smaller box anchored to the right, leaving the
-    // rest of the hero empty (the section's own dark background shows
-    // through) so the text has room and the artwork reads as a smaller,
-    // deliberately placed object rather than a full-bleed cover image.
-    const isNarrow = w < 700;
-    const boxW = w * (isNarrow ? 0.78 : 0.52);
-    const boxH = h * (isNarrow ? 0.24 : 0.71);
-    const marginRight = w * (isNarrow ? 0.03 : 0.05);
-
-    const scale = Math.min(boxW / img.naturalWidth, boxH / img.naturalHeight);
+    // Fill the hero-canvas-wrap while preserving the image's aspect ratio.
+    const scale = Math.min((w * 0.96) / img.naturalWidth, (h * 0.96) / img.naturalHeight);
     const dw = img.naturalWidth * scale;
     const dh = img.naturalHeight * scale;
-    const dx = w - marginRight - dw;
-    const dy = isNarrow ? h * 0.045 : (h - dh) / 2;
+    const dx = (w - dw) / 2;
+    const dy = (h - dh) / 2;
     ctx.drawImage(img, dx, dy, dw, dh);
   }
 

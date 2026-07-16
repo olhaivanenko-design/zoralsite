@@ -154,44 +154,88 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; margin: 0; }
   height: 100vh;
   display: flex;
   align-items: center;
+  gap: clamp(40px, 4vw, 80px);
+  padding: 0 max(24px, calc((100vw - var(--maxw)) / 2 + 24px));
   overflow: hidden;
   background: #262b34;
-}
-
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-  z-index: 0;
 }
 
 .hero-inner {
   position: relative;
   z-index: 2;
-  max-width: 560px;
-  padding: 100px 24px 40px max(24px, calc((100vw - var(--maxw)) / 2 + 24px));
+  flex-shrink: 0;
+  width: 100%;
+  min-width: 420px;
+  max-width: 520px;
+  padding: 100px 0 40px;
+}
+
+.hero-canvas-wrap {
+  flex: 1;
+  min-width: 0;
+  max-width: 640px;
+  aspect-ratio: 4 / 3;
+  position: relative;
+}
+
+#framePlayer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .hero h1 {
-  font-size: clamp(2.1rem, 4vw, 3.05rem);
-  line-height: 1.08;
+  font-size: clamp(3.25rem, 4vw, 4.25rem);
+  line-height: 1.05;
   margin-bottom: 20px;
 }
 
 .hero-sub {
   color: var(--text-1);
-  font-size: 1.05rem;
-  line-height: 1.65;
+  font-size: clamp(1rem, 1.2vw, 1.19rem);
+  line-height: 1.55;
   margin: 0 0 32px;
-  max-width: 46ch;
+  max-width: 410px;
 }
 
 .hero-actions {
   display: flex;
   gap: 14px;
   flex-wrap: wrap;
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .hero-inner {
+    min-width: 360px;
+    max-width: 440px;
+  }
+  .hero-canvas-wrap {
+    max-width: 480px;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero {
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+    min-height: 100svh;
+    padding: 100px 24px 56px;
+    gap: 40px;
+  }
+  .hero-inner {
+    min-width: 0;
+    max-width: 100%;
+    padding: 0;
+    width: 100%;
+  }
+  .hero-canvas-wrap {
+    width: 100%;
+    max-width: 100%;
+    aspect-ratio: 4 / 3;
+  }
 }
 
 /* ---------- Stack strip ---------- */
