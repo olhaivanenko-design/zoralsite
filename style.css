@@ -435,7 +435,12 @@ main, footer {
   align-items: center;
   gap: 72px;
   width: max-content;
-  animation: logo-ticker 30s linear infinite;
+  animation: logo-ticker 50s linear infinite;
+  animation-play-state: paused;
+}
+
+.logo-ticker.is-visible .logo-ticker-track {
+  animation-play-state: running;
 }
 
 @keyframes logo-ticker {
