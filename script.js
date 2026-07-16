@@ -67,9 +67,57 @@
         const progress = Math.min((now - startTime) / AUTOPLAY_DURATION, 1);
         const index = Math.min(Math.floor(progress * images.length), images.length - 1);
         drawFrame(index);
-        if (progress < 1) requestAnimationFrame(tick);
+        if (progress < 1) {
+          requestAnimationFrame(tick);
+        } else {
+          enableDragScrub();
+        }
       }
       requestAnimationFrame(tick);
+    }
+
+    // ---------- Drag scrub ----------
+    function enableDragScrub() {
+      // px of vertical drag to advance one frame
+      const PX_PER_FRAME = 10;
+      let dragging = false;
+      let startY = 0;
+      let startFrame = 0;
+
+      function getClientY(e) {
+        return e.touches ? e.touches[0].clientY : e.clientY;
+      }
+
+      function onDown(e) {
+        dragging  = true;
+        startY    = getClientY(e);
+        startFrame = currentFrame;
+        canvas.style.cursor = 'grabbing';
+        e.preventDefault();
+      }
+
+      function onMove(e) {
+        if (!dragging) return;
+        // drag up → positive delta → higher frame index (assemble)
+        const delta = Math.round((startY - getClientY(e)) / PX_PER_FRAME);
+        const next  = Math.max(0, Math.min(images.length - 1, startFrame + delta));
+        drawFrame(next);
+        e.preventDefault();
+      }
+
+      function onUp() {
+        if (!dragging) return;
+        dragging = false;
+        canvas.style.cursor = 'ns-resize';
+      }
+
+      canvas.style.cursor = 'ns-resize';
+      canvas.addEventListener('mousedown',  onDown, { passive: false });
+      canvas.addEventListener('mousemove',  onMove, { passive: false });
+      window.addEventListener('mouseup',    onUp);
+      canvas.addEventListener('touchstart', onDown, { passive: false });
+      canvas.addEventListener('touchmove',  onMove, { passive: false });
+      window.addEventListener('touchend',   onUp);
     }
 
     // Preload all images; start playback once every image is ready
@@ -78,7 +126,7 @@
     let imagesReady = false;
     let revealReady = !document.getElementById('preloader');
 
-    const REVEAL_DELAY = 2000; // ms pause after preloader wipes before animation starts
+    const REVEAL_DELAY = 4000; // ms pause after preloader wipes before animation starts
 
     function tryStart() {
       if (imagesReady && revealReady) setTimeout(startAutoplay, REVEAL_DELAY);
