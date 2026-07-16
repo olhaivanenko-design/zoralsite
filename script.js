@@ -61,6 +61,7 @@
   } else {
     // ---------- Autoplay loop ----------
     function startAutoplay() {
+      canvas.style.opacity = '1'; // fade-in on first frame
       let startTime = null;
       function tick(now) {
         if (startTime === null) startTime = now;
