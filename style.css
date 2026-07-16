@@ -427,8 +427,8 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; margin: 0; }
 }
 
 @keyframes logo-ticker {
-  from { transform: translateX(-50%); }
-  to   { transform: translateX(0); }
+  from { transform: translateX(0); }
+  to   { transform: translateX(-33.333%); }
 }
 
 .logo-ticker-track img {
@@ -691,13 +691,14 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; margin: 0; }
   text-align: center;
   padding-top: 0;
 }
+.atelier-cta .section-tag { color: rgba(0,0,0,0.38); }
 .atelier-cta h2 {
   font-size: clamp(26px, 4vw, 52px);
   font-weight: 700;
   color: #0a0a0b;
   letter-spacing: -1.2px;
   line-height: 1.1;
-  margin: 120px auto 24px;
+  margin: 40px auto 24px;
   max-width: 680px;
 }
 .atelier-cta > .atelier-inner > p,
