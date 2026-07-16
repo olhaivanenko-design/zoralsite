@@ -127,7 +127,7 @@
     let imagesReady = false;
     let revealReady = !document.getElementById('preloader');
 
-    const REVEAL_DELAY = 4000; // ms pause after preloader wipes before animation starts
+const REVEAL_DELAY = 0; // start canvas animation immediately after preloader
 
     function tryStart() {
       if (imagesReady && revealReady) setTimeout(startAutoplay, REVEAL_DELAY);
