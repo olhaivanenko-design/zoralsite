@@ -185,7 +185,7 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; margin: 0; }
 
 .nav-inner {
   max-width: none;
-  padding: 14px max(24px, calc((100vw - var(--maxw)) / 2 + 24px));
+  padding: 14px 24px 14px max(24px, calc((100vw - var(--maxw)) / 2 + 24px));
   display: flex;
   align-items: center;
   justify-content: space-between;
