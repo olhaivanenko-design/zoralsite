@@ -161,6 +161,13 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; margin: 0; }
 }
 .btn-primary:hover { background: #58e89e; }
 
+.btn-secondary {
+  background: transparent;
+  color: var(--text-0);
+  border-color: rgba(255,255,255,0.2);
+}
+.btn-secondary:hover { border-color: rgba(255,255,255,0.4); }
+
 .btn-ghost {
   background: transparent;
   color: var(--text-0);
@@ -174,12 +181,14 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; margin: 0; }
 /* ---------- Nav ---------- */
 
 .nav {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 10;
-  background: transparent;
+  z-index: 1000;
+  background: rgba(8,9,11,0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
@@ -355,14 +364,11 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; margin: 0; }
   top: 0;
   z-index: 2;
   background: #ffffff;
-  border-radius: 20px 20px 0 0;
+  border-radius: 0;
   box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.18);
 }
 
-main, footer {
-  position: relative;
-  z-index: 1;
-}
+/* (main removed, footer handled separately) */
 
 .overview-inner {
   max-width: var(--maxw);
@@ -477,9 +483,9 @@ main, footer {
 }
 
 .atelier-intro         { z-index: 3; background: #0a0a0b; }
-.atelier-accord-section { z-index: 4; background: #0c0d0f; }
+.atelier-accord-section { z-index: 4; background: #f6f7f9; box-shadow: 0 -1px 0 rgba(0,0,0,0.06), 0 -12px 40px rgba(0,0,0,0.18); }
 .atelier-services      { z-index: 5; background: #0a0a0b; }
-.atelier-cta           { z-index: 6; background: #0c0d0f; }
+.atelier-cta           { z-index: 6; background: #ffffff; box-shadow: 0 -1px 0 rgba(0,0,0,0.06), 0 -12px 40px rgba(0,0,0,0.18); }
 
 /* Shared inner */
 .atelier-inner {
@@ -488,7 +494,7 @@ main, footer {
   padding: 0 40px;
 }
 
-/* Section tag */
+/* Section tag — clear fixed nav height */
 .section-tag {
   display: flex;
   align-items: center;
@@ -498,7 +504,7 @@ main, footer {
   letter-spacing: 2px;
   text-transform: uppercase;
   color: rgba(255,255,255,0.35);
-  padding: 40px 0 0;
+  padding: 80px 0 0;
   margin: 0;
 }
 .tag-dot {
@@ -540,6 +546,17 @@ main, footer {
 .atelier-accord-section {
   padding-bottom: 48px;
 }
+/* White bg overrides for accordion */
+.atelier-accord-section .section-tag { color: rgba(0,0,0,0.38); }
+.atelier-accord-section .accord-head h3 { color: rgba(0,0,0,0.72); }
+.atelier-accord-section .accord-item:hover .accord-head h3,
+.atelier-accord-section .accord-item.open .accord-head h3 { color: #000; }
+.atelier-accord-section .accord-btn { border-color: rgba(0,0,0,0.15); color: rgba(0,0,0,0.45); }
+.atelier-accord-section .accord-item { border-top-color: rgba(0,0,0,0.08); }
+.atelier-accord-section .accord-item:last-child { border-bottom-color: rgba(0,0,0,0.08); }
+.atelier-accord-section .accord-body p,
+.atelier-accord-section .accord-body ul li { color: rgba(0,0,0,0.48); }
+.atelier-accord-section .accord-body ul li strong { color: rgba(0,0,0,0.7); }
 .accord-item {
   border-top: 1px solid rgba(255,255,255,0.08);
 }
@@ -692,6 +709,20 @@ main, footer {
 /* CTA */
 .atelier-cta {
   border-top: none;
+  padding-bottom: 120px;
+}
+/* White bg overrides for CTA */
+.atelier-cta h2 { color: #0a0a0b; }
+.atelier-cta > .atelier-inner > p,
+.atelier-cta-inner > p { color: rgba(0,0,0,0.48); }
+.atelier-cta .btn-secondary {
+  color: #0a0a0b;
+  border-color: rgba(0,0,0,0.2);
+}
+.atelier-cta .btn-secondary:hover {
+  border-color: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.04);
+}
 }
 .atelier-cta-inner {
   text-align: center;
@@ -954,7 +985,7 @@ main, footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 48px 0 32px;
+  padding: 80px 0 32px;
 }
 .footer-brand {
   font-size: 22px;
