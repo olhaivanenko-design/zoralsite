@@ -98,8 +98,8 @@
 
       function onMove(e) {
         if (!dragging) return;
-        // drag up → positive delta → higher frame index (assemble)
-        const delta = Math.round((startY - getClientY(e)) / PX_PER_FRAME);
+        // drag down → positive delta → higher frame index (assemble)
+        const delta = Math.round((getClientY(e) - startY) / PX_PER_FRAME);
         const next  = Math.max(0, Math.min(images.length - 1, startFrame + delta));
         drawFrame(next);
         e.preventDefault();
