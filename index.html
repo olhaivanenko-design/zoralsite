@@ -237,7 +237,18 @@
     var items = document.querySelectorAll('[data-reveal]');
     items.forEach(function (el) {
       var order = parseInt(el.getAttribute('data-reveal'), 10);
-      setTimeout(function () { el.classList.add('is-visible'); }, BASE_DELAY + order * STEP);
+      setTimeout(function () {
+        el.classList.add('is-visible');
+        // When the canvas wrapper finishes its blur transition, signal script.js
+        if (el.classList.contains('hero-canvas-wrap')) {
+          el.addEventListener('transitionend', function onEnd(e) {
+            if (e.propertyName === 'filter') {
+              el.removeEventListener('transitionend', onEnd);
+              window.dispatchEvent(new CustomEvent('canvas-revealed'));
+            }
+          });
+        }
+      }, BASE_DELAY + order * STEP);
     });
   }
 

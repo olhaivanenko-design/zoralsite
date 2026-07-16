@@ -133,7 +133,8 @@ const REVEAL_DELAY = 0; // start canvas animation immediately after preloader
     }
 
     if (!revealReady) {
-      window.addEventListener('preloader-reveal', function () {
+      // Wait for canvas blur transition to finish before starting autoplay
+      window.addEventListener('canvas-revealed', function () {
         revealReady = true;
         tryStart();
       }, { once: true });
