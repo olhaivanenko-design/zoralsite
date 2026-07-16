@@ -186,9 +186,7 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; margin: 0; }
   left: 0;
   right: 0;
   z-index: 1000;
-  background: rgba(8,9,11,0.88);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: transparent;
   border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
@@ -364,7 +362,7 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; margin: 0; }
   top: 0;
   z-index: 2;
   background: #ffffff;
-  border-radius: 0;
+  border-radius: 20px 20px 0 0;
   box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.18);
 }
 
