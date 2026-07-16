@@ -697,7 +697,7 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; margin: 0; }
   color: #0a0a0b;
   letter-spacing: -1.2px;
   line-height: 1.1;
-  margin: 80px auto 24px;
+  margin: 120px auto 24px;
   max-width: 680px;
 }
 .atelier-cta > .atelier-inner > p,
@@ -938,7 +938,7 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; margin: 0; }
 
 .footer {
   position: relative;
-  z-index: 1;
+  z-index: 8;
   background: #0a0a0b;
   border-top: 1px solid rgba(255,255,255,0.07);
 }
