@@ -241,7 +241,7 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; margin: 0; }
   align-items: center;
   gap: 50px;
   padding-top: 24px;
-  padding-bottom: 48px;
+  padding-bottom: 80px;
   padding-left: max(24px, calc((100vw - var(--maxw)) / 2 + 24px));
   padding-right: 0;
   overflow: hidden;
@@ -413,6 +413,46 @@ main, footer {
     flex: none;
     width: 100%;
   }
+}
+
+/* ---------- Logo ticker ---------- */
+
+.logo-ticker {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  padding: 18px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+
+.logo-ticker-track {
+  display: flex;
+  align-items: center;
+  gap: 72px;
+  width: max-content;
+  animation: logo-ticker 30s linear infinite;
+}
+
+@keyframes logo-ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.logo-ticker-track img {
+  height: 20px;
+  width: auto;
+  display: block;
+  flex-shrink: 0;
+  filter: brightness(0) invert(1);
+  opacity: 0.3;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-ticker-track { animation: none; }
 }
 
 /* ---------- Stack strip ---------- */
