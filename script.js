@@ -72,11 +72,29 @@
       requestAnimationFrame(tick);
     }
 
-    // Preload all images; start playback only once every image is ready.
+    // Preload all images; start playback once every image is ready
+    // AND the preloader has revealed (if present this session).
     let loaded = 0;
+    let imagesReady = false;
+    let revealReady = !document.getElementById('preloader');
+
+    function tryStart() {
+      if (imagesReady && revealReady) startAutoplay();
+    }
+
+    if (!revealReady) {
+      window.addEventListener('preloader-reveal', function () {
+        revealReady = true;
+        tryStart();
+      }, { once: true });
+    }
+
     function onLoad() {
       loaded++;
-      if (loaded === images.length) startAutoplay();
+      if (loaded === images.length) {
+        imagesReady = true;
+        tryStart();
+      }
     }
     images.forEach(img => {
       if (img.complete && img.naturalWidth > 0) {

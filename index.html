@@ -9,6 +9,16 @@
 </head>
 <body>
 
+<script>if(sessionStorage.getItem('zoral-preload'))document.documentElement.classList.add('preload-done');</script>
+
+<div id="preloader" role="status" aria-label="Loading Zoral">
+  <div id="preloader-center">
+    <div class="pl-line pl-line-l"></div>
+    <img id="preloader-logo" src="images/logo.png" alt="Zoral" draggable="false" />
+    <div class="pl-line pl-line-r"></div>
+  </div>
+</div>
+
 <div class="top-section" id="top">
 
   <header class="nav" id="nav">
@@ -156,5 +166,65 @@
 </footer>
 
 <script src="script.js"></script>
+<script>
+(function () {
+  var preloader = document.getElementById('preloader');
+  if (!preloader) return;
+
+  // Already seen this session — CSS hides the element, nothing to animate
+  if (sessionStorage.getItem('zoral-preload')) return;
+
+  var logo  = document.getElementById('preloader-logo');
+  var lineL = document.querySelector('.pl-line-l');
+  var lineR = document.querySelector('.pl-line-r');
+
+  // Reduced motion — skip immediately
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    preloader.remove();
+    sessionStorage.setItem('zoral-preload', '1');
+    window.dispatchEvent(new CustomEvent('preloader-reveal'));
+    return;
+  }
+
+  document.body.style.overflow = 'hidden';
+
+  // 1 — Fade in + lift logo
+  setTimeout(function () {
+    logo.style.transition = 'opacity 450ms ease-out, transform 450ms ease-out';
+    logo.style.opacity    = '1';
+    logo.style.transform  = 'translateY(0)';
+  }, 120);
+
+  // 2 — Expand lines (expo.inOut: slow → explosive → settle)
+  var LINE_EASE = 'cubic-bezier(0.87, 0, 0.13, 1)';
+  setTimeout(function () {
+    lineL.style.transition = 'transform 1200ms ' + LINE_EASE;
+    lineR.style.transition = 'transform 1200ms ' + LINE_EASE;
+    lineL.style.transform  = 'scaleX(1)';
+    lineR.style.transform  = 'scaleX(1)';
+  }, 660);
+
+  // 3 — Fade out logo at ~90 % of line travel
+  setTimeout(function () {
+    logo.style.transition = 'opacity 220ms ease-out';
+    logo.style.opacity    = '0';
+  }, 1740);
+
+  // 4 — Wipe overlay upward + fire reveal (expo.out: fast decisive curtain)
+  var WIPE_EASE = 'cubic-bezier(0.16, 1, 0.3, 1)';
+  setTimeout(function () {
+    preloader.style.transition = 'transform 860ms ' + WIPE_EASE;
+    preloader.style.transform  = 'translateY(-100%)';
+    window.dispatchEvent(new CustomEvent('preloader-reveal'));
+  }, 1920);
+
+  // 5 — Remove overlay
+  setTimeout(function () {
+    preloader.remove();
+    document.body.style.overflow = '';
+    sessionStorage.setItem('zoral-preload', '1');
+  }, 2840);
+}());
+</script>
 </body>
 </html>
