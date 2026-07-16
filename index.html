@@ -299,11 +299,12 @@
 
   document.body.style.overflow = 'hidden';
 
-  // 1 — Fade in + lift logo
+  // 1 — Wipe in logo bottom → top
+  var LOGO_IN  = 'cubic-bezier(0.16, 1, 0.3, 1)';
+  var LOGO_OUT = 'cubic-bezier(0.55, 0, 1, 0.45)';
   setTimeout(function () {
-    logo.style.transition = 'opacity 500ms ease-out, transform 500ms ease-out';
-    logo.style.opacity    = '1';
-    logo.style.transform  = 'translateY(0)';
+    logo.style.transition = 'clip-path 550ms ' + LOGO_IN;
+    logo.style.clipPath   = 'inset(0 0 0 0)';
   }, 150);
 
   // 2 — Expand lines (expo.inOut: slow → explosive → settle)
@@ -315,10 +316,10 @@
     lineR.style.transform  = 'scaleX(1)';
   }, 720);
 
-  // 3 — Fade out logo at ~90 % of line travel
+  // 3 — Wipe out logo top → bottom
   setTimeout(function () {
-    logo.style.transition = 'opacity 250ms ease-out';
-    logo.style.opacity    = '0';
+    logo.style.transition = 'clip-path 350ms ' + LOGO_OUT;
+    logo.style.clipPath   = 'inset(100% 0 0 0)';
   }, 2070);
 
   // 3.5 — Contract lines from outer edges toward centre
