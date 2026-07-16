@@ -69,10 +69,10 @@
       let startTime = null;
       function tick(now) {
         if (startTime === null) startTime = now;
-        const progress = ((now - startTime) % AUTOPLAY_DURATION) / AUTOPLAY_DURATION;
+        const progress = Math.min((now - startTime) / AUTOPLAY_DURATION, 1);
         const index = Math.min(Math.floor(progress * images.length), images.length - 1);
         drawFrame(index);
-        requestAnimationFrame(tick);
+        if (progress < 1) requestAnimationFrame(tick);
       }
       requestAnimationFrame(tick);
     }
