@@ -463,6 +463,15 @@ main, footer {
 
 /* ---------- Atelier sections ---------- */
 
+/* Atelier sections stack above sticky hero */
+.atelier-intro,
+.atelier-feature,
+.atelier-services,
+.atelier-cta {
+  position: relative;
+  z-index: 1;
+}
+
 .atelier-intro {
   background: #fff;
   border-top: 1px solid #e8eaed;
