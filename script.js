@@ -127,7 +127,8 @@
     // AND the preloader has revealed (if present this session).
     let loaded = 0;
     let imagesReady = false;
-    let revealReady = !document.getElementById('preloader');
+    let revealReady = !document.getElementById('preloader') ||
+                      document.documentElement.classList.contains('preload-done');
 
 const REVEAL_DELAY = 0; // start canvas animation immediately after preloader
 
