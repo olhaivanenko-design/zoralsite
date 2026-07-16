@@ -190,40 +190,40 @@
 
   // 1 — Fade in + lift logo
   setTimeout(function () {
-    logo.style.transition = 'opacity 450ms ease-out, transform 450ms ease-out';
+    logo.style.transition = 'opacity 500ms ease-out, transform 500ms ease-out';
     logo.style.opacity    = '1';
     logo.style.transform  = 'translateY(0)';
-  }, 120);
+  }, 150);
 
   // 2 — Expand lines (expo.inOut: slow → explosive → settle)
   var LINE_EASE = 'cubic-bezier(0.87, 0, 0.13, 1)';
   setTimeout(function () {
-    lineL.style.transition = 'transform 1200ms ' + LINE_EASE;
-    lineR.style.transition = 'transform 1200ms ' + LINE_EASE;
+    lineL.style.transition = 'transform 1500ms ' + LINE_EASE;
+    lineR.style.transition = 'transform 1500ms ' + LINE_EASE;
     lineL.style.transform  = 'scaleX(1)';
     lineR.style.transform  = 'scaleX(1)';
-  }, 660);
+  }, 720);
 
   // 3 — Fade out logo at ~90 % of line travel
   setTimeout(function () {
-    logo.style.transition = 'opacity 220ms ease-out';
+    logo.style.transition = 'opacity 250ms ease-out';
     logo.style.opacity    = '0';
-  }, 1740);
+  }, 2070);
 
-  // 4 — Wipe overlay upward + fire reveal (expo.out: fast decisive curtain)
-  var WIPE_EASE = 'cubic-bezier(0.16, 1, 0.3, 1)';
+  // 4 — Wipe overlay upward + fire reveal (smooth inOut: gentle lift from the start)
+  var WIPE_EASE = 'cubic-bezier(0.45, 0, 0.55, 1)';
   setTimeout(function () {
-    preloader.style.transition = 'transform 860ms ' + WIPE_EASE;
+    preloader.style.transition = 'transform 1100ms ' + WIPE_EASE;
     preloader.style.transform  = 'translateY(-100%)';
     window.dispatchEvent(new CustomEvent('preloader-reveal'));
-  }, 1920);
+  }, 2300);
 
   // 5 — Remove overlay
   setTimeout(function () {
     preloader.remove();
     document.body.style.overflow = '';
     sessionStorage.setItem('zoral-preload', '1');
-  }, 2840);
+  }, 3500);
 }());
 </script>
 </body>
