@@ -23,22 +23,22 @@
 
   <header class="nav" id="nav">
     <div class="nav-inner">
-      <a href="#top" class="brand">
+      <a href="#top" class="brand reveal" data-reveal="0">
         <img src="images/logo.png" alt="Zoral" class="brand-logo" />
       </a>
       <nav class="nav-links" aria-label="Primary">
-        <a href="#platform">Platform</a>
-        <a href="#modules">Modules</a>
-        <a href="#outcomes">Outcomes</a>
-        <a href="#contact">Contact</a>
+        <a href="#platform" class="reveal" data-reveal="1">Platform</a>
+        <a href="#modules" class="reveal" data-reveal="2">Modules</a>
+        <a href="#outcomes" class="reveal" data-reveal="3">Outcomes</a>
+        <a href="#contact" class="reveal" data-reveal="4">Contact</a>
       </nav>
     </div>
   </header>
 
   <section class="hero" id="animFrame">
       <div class="hero-inner">
-        <h1>Build Your Competitive Advantage with Zoral Atelier Consulting Services</h1>
-        <p class="hero-statement">MOVE FROM HIGH-LEVEL INSTITUTIONAL STRATEGY TO PRODUCTION-READY EXECUTION.</p>
+        <h1 class="reveal" data-reveal="5">Build Your Competitive Advantage with Zoral Atelier Consulting Services</h1>
+        <p class="hero-statement reveal" data-reveal="6">MOVE FROM HIGH-LEVEL INSTITUTIONAL STRATEGY TO PRODUCTION-READY EXECUTION.</p>
     </div>
     <div class="hero-canvas-wrap">
       <canvas id="framePlayer" aria-label="Zoral product animation"></canvas>
@@ -224,6 +224,27 @@
     document.body.style.overflow = '';
     sessionStorage.setItem('zoral-preload', '1');
   }, 3500);
+}());
+</script>
+
+<script>
+// Staggered reveal after preloader wipes away
+(function () {
+  var BASE_DELAY = 200; // ms after preloader-reveal event
+  var STEP       = 75;  // ms between each element
+
+  function runReveal() {
+    var items = document.querySelectorAll('[data-reveal]');
+    items.forEach(function (el) {
+      var order = parseInt(el.getAttribute('data-reveal'), 10);
+      setTimeout(function () { el.classList.add('is-visible'); }, BASE_DELAY + order * STEP);
+    });
+  }
+
+  // If preloader was skipped (second visit), CSS already shows elements — nothing to do
+  if (document.documentElement.classList.contains('preload-done')) return;
+
+  window.addEventListener('preloader-reveal', runReveal, { once: true });
 }());
 </script>
 </body>
