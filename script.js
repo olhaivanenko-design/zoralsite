@@ -5,11 +5,12 @@
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  const FRAME_COUNT = 80;
-  const STATIC_FRAME = 40;
+  const FRAME_COUNT = 41;
+  const STATIC_FRAME = 20;
 
   function frameSrc(i) {
-    return `frames/frame_${String(i).padStart(3, '0')}.png`;
+    if (i <= 11) return `frames_2/1-11.png`;
+    return `frames_2/${i}.png`;
   }
 
   const images = [];
