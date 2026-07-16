@@ -6,9 +6,9 @@
 
   const AUTOPLAY_DURATION = 4000; // ms for one complete animation cycle
 
-  // Unique image sequence: 1-11.png appears once, then 12.png through 41.png
+  // Unique image sequence: 1-11.png appears once, then 12.png through 42.png
   const imageSrcs = ['frames_2/1-11.png'];
-  for (let i = 12; i <= 41; i++) imageSrcs.push(`frames_2/${i}.png`);
+  for (let i = 12; i <= 42; i++) imageSrcs.push(`frames_2/${i}.png`);
 
   const images = imageSrcs.map(src => {
     const img = new Image();
@@ -78,8 +78,10 @@
     let imagesReady = false;
     let revealReady = !document.getElementById('preloader');
 
+    const REVEAL_DELAY = 2000; // ms pause after preloader wipes before animation starts
+
     function tryStart() {
-      if (imagesReady && revealReady) startAutoplay();
+      if (imagesReady && revealReady) setTimeout(startAutoplay, REVEAL_DELAY);
     }
 
     if (!revealReady) {
