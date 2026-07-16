@@ -71,6 +71,9 @@
           requestAnimationFrame(tick);
         } else {
           enableDragScrub();
+          // reveal logo ticker after animation completes
+          const ticker = document.querySelector('.logo-ticker');
+          if (ticker) setTimeout(() => ticker.classList.add('is-visible'), 300);
         }
       }
       requestAnimationFrame(tick);
