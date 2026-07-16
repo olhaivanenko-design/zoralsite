@@ -9,8 +9,6 @@
 </head>
 <body>
 
-<script>if(sessionStorage.getItem('zoral-preload'))document.documentElement.classList.add('preload-done');</script>
-
 <div id="preloader" role="status" aria-label="Loading Zoral">
   <div id="preloader-center">
     <div class="pl-line pl-line-l"></div>
@@ -282,9 +280,6 @@
   var preloader = document.getElementById('preloader');
   if (!preloader) return;
 
-  // Already seen this session — CSS hides the element, nothing to animate
-  if (sessionStorage.getItem('zoral-preload')) return;
-
   var logo  = document.getElementById('preloader-logo');
   var lineL = document.querySelector('.pl-line-l');
   var lineR = document.querySelector('.pl-line-r');
@@ -292,7 +287,6 @@
   // Reduced motion — skip immediately
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     preloader.remove();
-    sessionStorage.setItem('zoral-preload', '1');
     window.dispatchEvent(new CustomEvent('preloader-reveal'));
     return;
   }
@@ -343,7 +337,6 @@
   setTimeout(function () {
     preloader.remove();
     document.body.style.overflow = '';
-    sessionStorage.setItem('zoral-preload', '1');
   }, 4100);
 }());
 </script>
