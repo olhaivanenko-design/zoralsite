@@ -144,6 +144,7 @@ const REVEAL_DELAY = 0; // start canvas animation immediately after preloader
       loaded++;
       if (loaded === images.length) {
         imagesReady = true;
+        drawFrame(0); // render first frame so it shows through the canvas blur reveal
         tryStart();
       }
     }
