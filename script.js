@@ -1,24 +1,20 @@
 (() => {
   const canvas = document.getElementById('framePlayer');
   const ctx = canvas.getContext('2d');
-  const pinWrap = document.getElementById('heroPinWrap');
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  const FRAME_COUNT = 41;
-  const STATIC_FRAME = 20;
+  const AUTOPLAY_DURATION = 4000; // ms for one complete animation cycle
 
-  function frameSrc(i) {
-    if (i <= 11) return `frames_2/1-11.png`;
-    return `frames_2/${i}.png`;
-  }
+  // Unique image sequence: 1-11.png appears once, then 12.png through 41.png
+  const imageSrcs = ['frames_2/1-11.png'];
+  for (let i = 12; i <= 41; i++) imageSrcs.push(`frames_2/${i}.png`);
 
-  const images = [];
-  for (let i = 1; i <= FRAME_COUNT; i++) {
+  const images = imageSrcs.map(src => {
     const img = new Image();
-    img.src = frameSrc(i);
-    images.push(img);
-  }
+    img.src = src;
+    return img;
+  });
 
   let dpr = Math.min(window.devicePixelRatio || 1, 2);
   let w = 0, h = 0;
@@ -60,7 +56,7 @@
   window.addEventListener('resize', resize);
 
   if (reduceMotion) {
-    const idx = STATIC_FRAME - 1;
+    const idx = Math.floor(images.length / 2);
     const wait = setInterval(() => {
       if (images[idx].complete) {
         drawFrame(idx);
@@ -68,39 +64,32 @@
       }
     }, 50);
   } else {
-    // ---------- Scroll-driven playback ----------
-    // Frame index tracks how far the hero has scrolled past the top of the
-    // viewport, so scrubbing forward/back through the sequence follows the
-    // user's scroll direction instead of looping on a timer.
-    let scrollRange = 1;
-
-    function computeScrollRange() {
-      scrollRange = Math.max(pinWrap.offsetHeight - window.innerHeight, 1);
+    // ---------- Autoplay loop ----------
+    function startAutoplay() {
+      let startTime = null;
+      function tick(now) {
+        if (startTime === null) startTime = now;
+        const progress = ((now - startTime) % AUTOPLAY_DURATION) / AUTOPLAY_DURATION;
+        const index = Math.min(Math.floor(progress * images.length), images.length - 1);
+        drawFrame(index);
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
     }
 
-    function frameForScroll() {
-      const rect = pinWrap.getBoundingClientRect();
-      const progress = Math.min(1, Math.max(0, -rect.top / scrollRange));
-      return Math.round(progress * (FRAME_COUNT - 1));
+    // Preload all images; start playback only once every image is ready.
+    let loaded = 0;
+    function onLoad() {
+      loaded++;
+      if (loaded === images.length) startAutoplay();
     }
-
-    let ticking = false;
-    function redraw() {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        drawFrame(frameForScroll());
-        ticking = false;
-      });
-    }
-
-    computeScrollRange();
-    window.addEventListener('resize', computeScrollRange);
-    window.addEventListener('scroll', redraw, { passive: true });
-
-    // Redraw whenever a frame finishes loading, in case the currently
-    // needed frame wasn't ready yet (e.g. a static scroll position on load).
-    images.forEach((img) => img.addEventListener('load', redraw));
-    redraw();
+    images.forEach(img => {
+      if (img.complete && img.naturalWidth > 0) {
+        onLoad();
+      } else {
+        img.addEventListener('load', onLoad);
+        img.addEventListener('error', onLoad); // treat errors as loaded to not block playback
+      }
+    });
   }
 })();
