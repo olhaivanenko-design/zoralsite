@@ -181,7 +181,7 @@ const REVEAL_DELAY = 0; // start canvas animation immediately after preloader
   for (var i = 0; i < TOTAL; i++) {
     // smooth sine ease: 0 → 1 → 0 over full cycle
     var t = 0.5 - 0.5 * Math.cos(2 * Math.PI * i / TOTAL);
-    var radius = 5 + 8 * t;        // 5 → 13 → 5
+    var radius = 5 + 3 * t;        // 5 → 8 → 5 (subtle pulse)
     var alpha  = 0.45 + 0.55 * t;  // 0.45 → 1.0 → 0.45
 
     ctx.clearRect(0, 0, SIZE, SIZE);
