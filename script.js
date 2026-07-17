@@ -162,33 +162,50 @@ const REVEAL_DELAY = 0; // start canvas animation immediately after preloader
   }
 })();
 
-// Favicon pulse animation
+// Favicon pulse animation — canvas data URLs (no network, no flicker)
 (function initFaviconPulse() {
   const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
   if (mq.matches) return;
 
-  const FRAMES = 12;
-  const INTERVAL = 200;
-  const frames = Array.from({ length: FRAMES }, (_, i) =>
-    'images/favicon-frames/f' + String(i).padStart(2, '0') + '.png'
-  );
+  const TOTAL = 20;
+  const INTERVAL = 100; // 20 frames × 100ms = 2s cycle
+  const SIZE = 32;
+  const COLOR = '#3fe08c';
 
-  // Preload all frames
-  frames.forEach(src => { const img = new Image(); img.src = src; });
+  const canvas = document.createElement('canvas');
+  canvas.width = SIZE;
+  canvas.height = SIZE;
+  const ctx = canvas.getContext('2d');
+  const frames = [];
 
-  const link = document.querySelector('link[rel="icon"]');
+  for (var i = 0; i < TOTAL; i++) {
+    // smooth sine ease: 0 → 1 → 0 over full cycle
+    var t = 0.5 - 0.5 * Math.cos(2 * Math.PI * i / TOTAL);
+    var radius = 5 + 8 * t;        // 5 → 13 → 5
+    var alpha  = 0.45 + 0.55 * t;  // 0.45 → 1.0 → 0.45
+
+    ctx.clearRect(0, 0, SIZE, SIZE);
+    ctx.beginPath();
+    ctx.arc(SIZE / 2, SIZE / 2, radius, 0, Math.PI * 2);
+    ctx.fillStyle = COLOR;
+    ctx.globalAlpha = alpha;
+    ctx.fill();
+    ctx.globalAlpha = 1;
+
+    frames.push(canvas.toDataURL('image/png'));
+  }
+
+  var link = document.querySelector('link[rel="icon"]');
   if (!link) return;
-
-  let idx = 0;
   link.type = 'image/png';
   link.sizes = '32x32';
 
-  const timer = setInterval(function () {
+  var idx = 0;
+  var timer = setInterval(function () {
     link.href = frames[idx];
-    idx = (idx + 1) % FRAMES;
+    idx = (idx + 1) % TOTAL;
   }, INTERVAL);
 
-  // Stop if user turns on reduced-motion later
   mq.addEventListener('change', function (e) {
     if (e.matches) {
       clearInterval(timer);
