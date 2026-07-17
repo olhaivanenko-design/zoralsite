@@ -168,7 +168,7 @@ const REVEAL_DELAY = 0; // start canvas animation immediately after preloader
   if (mq.matches) return;
 
   const FRAMES = 12;
-  const INTERVAL = 120;
+  const INTERVAL = 200;
   const frames = Array.from({ length: FRAMES }, (_, i) =>
     'images/favicon-frames/f' + String(i).padStart(2, '0') + '.png'
   );
