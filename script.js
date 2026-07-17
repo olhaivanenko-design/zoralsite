@@ -167,8 +167,8 @@ const REVEAL_DELAY = 0; // start canvas animation immediately after preloader
   const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
   if (mq.matches) return;
 
-  const TOTAL = 20;
-  const INTERVAL = 100; // 20 frames × 100ms = 2s cycle
+  const TOTAL = 30;
+  const INTERVAL = 160; // 30 frames × 160ms = ~5s cycle
   const SIZE = 32;
   const COLOR = '#3fe08c';
 
