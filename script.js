@@ -111,10 +111,10 @@
       function onUp() {
         if (!dragging) return;
         dragging = false;
-        canvas.style.cursor = 'ns-resize';
+        canvas.style.cursor = 'grab';
       }
 
-      canvas.style.cursor = 'ns-resize';
+      canvas.style.cursor = 'grab';
       canvas.addEventListener('mousedown',  onDown, { passive: false });
       canvas.addEventListener('mousemove',  onMove, { passive: false });
       window.addEventListener('mouseup',    onUp);
