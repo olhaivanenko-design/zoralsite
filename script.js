@@ -161,3 +161,40 @@ const REVEAL_DELAY = 0; // start canvas animation immediately after preloader
     });
   }
 })();
+
+// Favicon pulse animation
+(function initFaviconPulse() {
+  const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (mq.matches) return;
+
+  const FRAMES = 12;
+  const INTERVAL = 120;
+  const frames = Array.from({ length: FRAMES }, (_, i) =>
+    'images/favicon-frames/f' + String(i).padStart(2, '0') + '.png'
+  );
+
+  // Preload all frames
+  frames.forEach(src => { const img = new Image(); img.src = src; });
+
+  const link = document.querySelector('link[rel="icon"]');
+  if (!link) return;
+
+  let idx = 0;
+  link.type = 'image/png';
+  link.sizes = '32x32';
+
+  const timer = setInterval(function () {
+    link.href = frames[idx];
+    idx = (idx + 1) % FRAMES;
+  }, INTERVAL);
+
+  // Stop if user turns on reduced-motion later
+  mq.addEventListener('change', function (e) {
+    if (e.matches) {
+      clearInterval(timer);
+      link.type = 'image/svg+xml';
+      link.sizes = '';
+      link.href = 'images/favicon.svg';
+    }
+  });
+})();
