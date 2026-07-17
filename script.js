@@ -6,8 +6,8 @@
 
   const AUTOPLAY_DURATION = 4000; // ms for one complete animation cycle
 
-  // WebP frame sequence: key frames 1–70
-  const imageSrcs = [1, 12, 20, 21, 28, 33, 37, 39, 40, 41, 42, 43, 44, 45, 46, 52, 58, 60, 62, 70].map(n => `frames_2/${n}.webp`);
+  // WebP frame sequence: key frames 1–80
+  const imageSrcs = [1, 12, 20, 21, 28, 33, 37, 39, 40, 41, 42, 43, 44, 45, 46, 52, 58, 60, 62, 70, 75, 80].map(n => `frames_2/${n}.webp`);
 
   const images = imageSrcs.map(src => {
     const img = new Image();
