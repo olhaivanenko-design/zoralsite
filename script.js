@@ -7,7 +7,9 @@
   const AUTOPLAY_DURATION = 4000; // ms for one complete animation cycle
 
   // WebP frame sequence: key frames 1–80
-  const imageSrcs = [1, 12, 20, 21, 28, 33, 37, 39, 40, 41, 42, 43, 44, 45, 46, 52, 58, 60, 62, 70, 75, 80].map(n => `frames_2/${n}.webp`);
+  // Mobile (<768px) uses 800px-wide versions (~728KB vs 6.2MB on desktop)
+  const frameDir = window.innerWidth < 768 ? 'frames_mobile' : 'frames_2';
+  const imageSrcs = [1, 12, 20, 21, 28, 33, 37, 39, 40, 41, 42, 43, 44, 45, 46, 52, 58, 60, 62, 70, 75, 80].map(n => `${frameDir}/${n}.webp`);
 
   const images = imageSrcs.map(src => {
     const img = new Image();
