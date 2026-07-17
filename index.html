@@ -399,12 +399,13 @@
     });
   });
 
-  // Scroll reveal
+  // Scroll reveal — replays every time element enters viewport
   var srObserver = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
       if (e.isIntersecting) {
         e.target.classList.add('in-view');
-        srObserver.unobserve(e.target);
+      } else {
+        e.target.classList.remove('in-view');
       }
     });
   }, { threshold: 0.08 });
