@@ -38,7 +38,7 @@
     ctx.clearRect(0, 0, w, h);
 
     // Fill the hero-canvas-wrap while preserving the image's aspect ratio.
-    const scale = Math.min((w * 0.96) / img.naturalWidth, (h * 0.96) / img.naturalHeight);
+    const scale = Math.min((w * 1.15) / img.naturalWidth, (h * 1.15) / img.naturalHeight);
     const dw = img.naturalWidth * scale;
     const dh = img.naturalHeight * scale;
     const dx = (w - dw) / 2;
