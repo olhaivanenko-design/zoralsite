@@ -259,9 +259,9 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; margin: 0; }
 .hero-inner {
   position: relative;
   z-index: 2;
-  flex: 0 0 533px;
+  flex: 0 0 600px;
   min-width: 0;
-  max-width: 533px;
+  max-width: 600px;
 }
 
 .hero-canvas-wrap {
@@ -280,11 +280,11 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; margin: 0; }
 }
 
 .hero h1 {
-  font-size: clamp(28px, 4vw, 52px);
+  font-size: clamp(32px, 4.5vw, 62px);
   font-weight: 700;
   color: #fff;
-  line-height: 1.06;
-  letter-spacing: -1.8px;
+  line-height: 1.08;
+  letter-spacing: -2px;
   margin-bottom: 32px;
 }
 
@@ -309,8 +309,8 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; margin: 0; }
   }
   .hero-inner {
     flex: 0 0 auto;
-    width: min(44%, 480px);
-    max-width: 480px;
+    width: min(48%, 540px);
+    max-width: 540px;
   }
   .hero-canvas-wrap {
     flex: 1 1 auto;
@@ -318,9 +318,9 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; margin: 0; }
     max-width: none;
   }
   .hero h1 {
-    font-size: clamp(22px, 2.8vw, 36px);
+    font-size: clamp(24px, 3.2vw, 42px);
     line-height: 1.08;
-    letter-spacing: -1.4px;
+    letter-spacing: -1.6px;
     margin-bottom: 24px;
   }
   .hero-statement {
