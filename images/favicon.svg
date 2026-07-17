@@ -1,32 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-  <defs>
-    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">
-      <feGaussianBlur stdDeviation="2.2" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-  </defs>
-
-  <rect width="48" height="48" rx="0" fill="#030504"/>
-
-  <circle cx="24" cy="24" r="6.4" fill="#3DF29A" filter="url(#glow)">
-    <animate
-      attributeName="r"
-      values="6.1;7.3;6.1"
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <circle cx="32" cy="32" r="8" fill="#3fe08c" opacity="0.65">
+    <animate attributeName="r"
+      values="8;12.5;8"
       dur="1.8s"
       repeatCount="indefinite"
       calcMode="spline"
       keyTimes="0;0.5;1"
-      keySplines="0.45 0 0.55 1;0.45 0 0.55 1"/>
-    <animate
-      attributeName="opacity"
-      values="0.82;1;0.82"
+      keySplines="0.45 0 0.55 1;0.45 0 0.55 1" />
+    <animate attributeName="opacity"
+      values="0.65;1;0.65"
       dur="1.8s"
       repeatCount="indefinite"
       calcMode="spline"
       keyTimes="0;0.5;1"
-      keySplines="0.45 0 0.55 1;0.45 0 0.55 1"/>
+      keySplines="0.45 0 0.55 1;0.45 0 0.55 1" />
   </circle>
 </svg>
