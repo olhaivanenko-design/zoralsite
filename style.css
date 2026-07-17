@@ -493,6 +493,7 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; margin: 0; }
   border-radius: 50%;
   background: var(--accent);
   flex-shrink: 0;
+  animation: dot-pulse 2.8s ease-in-out infinite;
 }
 
 .hero-dot {
