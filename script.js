@@ -6,9 +6,8 @@
 
   const AUTOPLAY_DURATION = 4000; // ms for one complete animation cycle
 
-  // Unique image sequence: 1-11.png appears once, then 12.png through 42.png
-  const imageSrcs = ['frames_2/1-11.png'];
-  for (let i = 12; i <= 42; i++) imageSrcs.push(`frames_2/${i}.png`);
+  // WebP frame sequence: key frames 1–46
+  const imageSrcs = [1, 12, 20, 21, 28, 33, 37, 39, 40, 41, 42, 43, 44, 45, 46].map(n => `frames_2/${n}.webp`);
 
   const images = imageSrcs.map(src => {
     const img = new Image();
